@@ -124,6 +124,12 @@ class Main
     private
     void writeAttributeFile(String key, String value) throws IOException
     {
+        if (value.isEmpty())
+        {
+            System.err.println("ignoring empty "+key+" attribute");
+            return;
+        }
+
         System.out.println("attribute: "+key+" -> "+value);
         var attributeFile = new File(outputDir, key);
         Files.createSymbolicLink(attributeFile.toPath(), new File(value).toPath());
